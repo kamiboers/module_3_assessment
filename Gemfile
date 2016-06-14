@@ -15,6 +15,7 @@ gem "rspec-rails"
 gem 'figaro'
 gem 'unicorn'
 gem 'httparty'
+gem 'responders'
 
 group :development do
   gem "spring"
