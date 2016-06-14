@@ -68,8 +68,7 @@ RSpec.describe Api::V1::ItemsController do
 
   describe "#create" do
     it "returns a successful response for create" do
-      item = create_item
-      post '/api/v1/items', name: "Smelloscope", description: "Smells", image_url: "smelloscope.jpg", format: :json
+      post :create, {item: {name: "Smelloscope", description: "Smells", image_url: "smelloscope.jpg"}}, format: :json
       result = JSON.parse(response.body)
 
       assert_response 201
