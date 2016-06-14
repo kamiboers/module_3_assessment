@@ -1,7 +1,9 @@
 class SearchController < ApplicationController
 
 def index
-  @stores = BestBuyService.call(params[:zip]).stores
+  response = BestBuyService.call(params[:zip])
+  @stores = response.first
+  @total_count = response.last
 end
 
 

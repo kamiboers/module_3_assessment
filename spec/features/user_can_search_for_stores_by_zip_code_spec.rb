@@ -11,12 +11,15 @@ RSpec.describe "search", :type => :feature do
       expect(current_path).to eq('/search')
       expect(page).to have_content('25 miles')
       expect(page).to have_content('17 Total Stores')
-      expect(@stores.count).to eq(15)
-      expect(page).to have_content('long name')
-      expect(page).to have_content('city')
-      expect(page).to have_content('distance')
-      expect(page).to have_content('phone number')
-      expect(page).to have_content('store type')
+      
+      expect(page).to have_selector('.store', count: 15)
+      expect(page).to have_selector('#303-693-0166', count: 1)
+
+      expect(page).to have_content('Store Name: Best Buy - Southglenn')
+      expect(page).to have_content('City: Centennial')
+      expect(page).to have_content('Distance: 11.0 miles')
+      expect(page).to have_content('Phone #: 303-797-3246')
+      expect(page).to have_content('Type: BigBox')
     end
   end
 

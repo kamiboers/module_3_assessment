@@ -1,9 +1,9 @@
 <h1>Search Results:</h1>
-<h3><%= %></h3>
+<h3><%= @total_count %> Total Stores</h3>
 <% @stores.each do |store| %>
 
 <div class="container">
-	<div class="store-<%= store.phone %> ">
+	<div class="store" id="<%= store.phone %>">
 	<h3>Store Name: <%= store.name %></h3>
 	City: <%= store.city %><br>
 	Store Type: <%= store.type %><br>
