@@ -16,6 +16,7 @@ gem 'figaro'
 gem 'unicorn'
 gem 'httparty'
 gem 'responders'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development do
   gem "spring"

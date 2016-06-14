@@ -11,22 +11,22 @@ RSpec.describe Api::V1::ItemsController do
     end
 
     it "returns all items as json" do
-      get :index, format: :json
       item = create_item(3)
-      binding.pry
-      expect(response.body.count).to eq(3)
-      expect(response.body.last['id']).to eq(item.id)
-
-      within("#item-id-#{item.id}") do
-        expect(page).to have_content(item.name)
-        expect(page).to have_content(item.description)
-        expect(page).to have_content(item.image_url)
-        expect(page).not_to have_content(item.created_at)
-        expect(page).not_to have_content(item.updated_at)
-      end
+      get :index, format: :json
+      result = JSON.parse(response.body)
+      
+      expect(result.count).to eq(3)
+      expect(result.last['id']).to eq(item.id)
+      expect(result).to have_content(item.name)
+      expect(result).to have_content(item.description)
+      expect(result).to have_content(item.image_url)
+      expect(response).not_to have_content("created_at")
+      expect(response).not_to have_content("updated_at")
     end
 
   end
+
+
 
 end
 
@@ -34,4 +34,8 @@ end
 # When I send a GET request to /api/v1/items
 # I receive a 200 JSON response containing all items 
 # And each item has a name, description, and image_url 
+# but not the created_at or updated_at
+
+# When I send a GET request to /api/v1/items/1 
+# I receive a 200 JSON response containing the name, description, and image_url 
 # but not the created_at or updated_at
