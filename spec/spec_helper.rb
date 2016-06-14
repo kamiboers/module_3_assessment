@@ -90,4 +90,15 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 
+def create_item(n)
+  n.times do |i|
+      item = Item.create!(
+        name: Faker::Commerce.product_name,
+        description: Faker::Lorem.paragraph,
+        image_url: "http://robohash.org/#{i}.png?set=set2&bgset=bg1&size=200x200"
+        )
+  end
+  Item.last
+end
+
 end

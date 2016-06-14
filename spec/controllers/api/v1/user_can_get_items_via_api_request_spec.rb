@@ -1,24 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe ItemsController, :type => :controller do
+RSpec.describe Api::V1::ItemsController do
   
-  describe "GET api/v1/items" do
-    it "returns a successful response" do
-      get 'api/v1/items', format: :json
+  describe "#items" do
 
-      expect(page.status_code).to eq(200)
+    it "returns a successful response" do
+      get :index, format: :json
+
       assert_response :success
     end
 
     it "returns all items as json" do
-       get :index, format: :json
+      get :index, format: :json
+      item = create_item(3)
+      binding.pry
+      expect(response.body.count).to eq(3)
+      expect(response.body.last['id']).to eq(item.id)
 
-      expect(response.body.count).to eq(100)
-      expect(response.body.last['id']).to eq(33)
-
-      item = Item.find(12)
-
-      within('#item-id-12') do
+      within("#item-id-#{item.id}") do
         expect(page).to have_content(item.name)
         expect(page).to have_content(item.description)
         expect(page).to have_content(item.image_url)
