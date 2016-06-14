@@ -14,5 +14,11 @@ def self.create_store_objects(response)
   [@stores, @count]
 end
 
+def self.store_info(id)
+  rs = HTTParty.get("https://api.bestbuy.com/v1/stores(storeId=#{id})?format=json&show=longName,address,city,region,distance,phone,storeType,postalCode,hoursAmPm&apiKey=#{ENV['BEST_BUY_KEY']}")['stores'].first
+  hour_array = rs['hoursAmPm'].split(';')
+  store = Store.new(rs['longName'], rs['city'], rs['distance'], rs['phone'], rs['storeType'], rs['storeId'], rs['address'], rs['region'], rs['postalCode'], hour_array)
+end
+
 
 end

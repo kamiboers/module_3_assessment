@@ -36,13 +36,14 @@ RSpec.describe "search", :type => :feature do
       expect(page).to have_content('Type: BigBox')
       expect(page).to have_content('Address: ')
       expect(page).to have_content('City: Centennial')
-      expect(page).to have_content('Zip: Centennial')
-      expect(page).to have_content('Distance: 11.0 miles')
-      expect(page).to have_content('Phone #: 303-797-3246')
-      within('ol') do
+      expect(page).to have_content('Zip: 80122')
+      # expect(page).to have_content('Distance: 11.0 miles')
+      # expect(page).to have_content('Phone #: 303-797-3246')
+      within('ul') do
         expect(page).to have_content('Mon: 10am-9pm')
       end
     end
+  end
 
 
 end

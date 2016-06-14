@@ -7,7 +7,7 @@ def index
 end
 
 def show
-  response = BestBuyService
-
+  @store = BestBuyService.store_info(params[:store_id])
+end
 
 end

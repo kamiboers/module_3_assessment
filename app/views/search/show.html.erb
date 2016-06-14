@@ -1,0 +1,16 @@
+<div class="container">
+	
+	Store Name: <%= @store.name %><br>
+	Address: <%= @store.address %><br>
+	Zip: <%= @store.zip %><br>
+	City: <%= @store.city %><br>
+	Store Type: <%= @store.type %><br>
+	Distance: <%= @store.distance %> miles<br>
+	Phone #: <%= @store.phone %><br>
+	Hours: 
+	<ul> <%= @store.hours.each do |h| %>
+		<li> <%= h %> </li>
+		<% end %>
+	</ul>
+
+</div>
