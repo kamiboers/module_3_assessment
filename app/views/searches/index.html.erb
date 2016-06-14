@@ -1,0 +1,16 @@
+<h1>Search Results:</h1>
+
+<% @results.each do |result| %>
+
+<div class="container">
+	<div class="store-<%= result.phone_number %> ">
+	<h3>Store Name: <%= result["long_name"] %></h3>
+	Address: <%= result["street_address"] %><br>
+	Store Type: <%= result["store_type"] %><br>
+	Distance: <%= result["distance"] %> miles<br>
+	Phone #: <%= result["phone_number"] %><br>
+</div>
+</div>
+
+<% end %>
+
