@@ -5,8 +5,8 @@ RSpec.describe "search", :type => :feature do
   describe "search for stores" do
     it "returns a local store search" do
       visit '/'
-      fill_in 'search' with '80202'
-      click_on "search"
+      fill_in 'zip', with: '80202'
+      click_on "Locate"
 
       expect(current_path).to eq('/search')
       expect(page).to have_content('25 miles')

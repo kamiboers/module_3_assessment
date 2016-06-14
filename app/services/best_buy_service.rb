@@ -1,11 +1,17 @@
 class BestBuyService
+attr_reader :stores
 
-def call(zip, distance=25)
-  HTTParty.get("http://api.bestbuy.com/v1/stores(area(#{zip},#{distance}))?format=json&show=longName,city,distance,phone,storeType&pageSize=15&apiKey=#{ENV['BEST_BUY_KEY']}")
-  raw_stores = JSON.parse(response.body)
-  binding.pry
+def self.call(zip, distance=25)
+  response = HTTParty.get("http://api.bestbuy.com/v1/stores(area(#{zip},#{distance}))?format=json&show=longName,city,distance,phone,storeType&pageSize=15&apiKey=#{ENV['BEST_BUY_KEY']}")
+  create_store_objects(response)
 end
-And I should see the long name, city, distance, phone number and store type for each of the 15 results
+
+def self.create_store_objects(response)
+  raw_stores = JSON.parse(response.body)['stores']
+  @stores = raw_stores.map do |rs|
+    Store.new(rs['longName'], rs['city'], rs['distance'], rs['phone'], rs['storeType'])
+  end
+end
 
 
 end
