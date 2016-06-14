@@ -90,7 +90,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 
-def create_item(n)
+def create_item(n=1)
   n.times do |i|
       item = Item.create!(
         name: Faker::Commerce.product_name,

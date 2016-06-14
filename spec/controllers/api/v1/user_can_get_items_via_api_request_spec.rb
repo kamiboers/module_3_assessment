@@ -14,14 +14,43 @@ RSpec.describe Api::V1::ItemsController do
       item = create_item(3)
       get :index, format: :json
       result = JSON.parse(response.body)
-      
+
       expect(result.count).to eq(3)
       expect(result.last['id']).to eq(item.id)
       expect(result).to have_content(item.name)
       expect(result).to have_content(item.description)
       expect(result).to have_content(item.image_url)
+
+      expect(result).not_to have_content("created_at")
+      expect(result).not_to have_content("updated_at")
+    end
+
+  end
+
+  describe "#item" do
+
+    it "returns a successful response" do
+      item = create_item
+      get :show, id: item.id, format: :json
+
+      assert_response :success
+    end
+
+    it "returns item as json" do
+      item = create_item
+      item2 = create_item
+      get :show, id: item.id, format: :json
+      result = JSON.parse(response.body)
+      
+      expect(result['id']).to eq(item.id)
+      expect(result).to have_content(item.name)
+      expect(result).to have_content(item.description)
+      expect(result).to have_content(item.image_url)
+
       expect(response).not_to have_content("created_at")
-      expect(response).not_to have_content("updated_at")
+      expect(response).not_to have_content("updated_at")  
+      expect(response).not_to have_content(item2.name)
+      expect(response).not_to have_content(item2.description)
     end
 
   end
